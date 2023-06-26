@@ -1,20 +1,13 @@
 <?xml version="1.0" ?>
 <modelspec>
-    <MyBook>
-        <title>My life in Python</title>
+    <MyBook title="My life in Python">
         <sections>
             <Abstract>
-                <paragraphs>
-                    <contents>Blah blah blah</contents>
-                </paragraphs>
-                <paragraphs>
-                    <contents>Blah2</contents>
-                </paragraphs>
+                <paragraphs contents="Blah blah blah"/>
+                <paragraphs contents="Blah2"/>
             </Abstract>
             <Chapter_1>
-                <paragraphs>
-                    <contents>More...</contents>
-                </paragraphs>
+                <paragraphs contents="More..."/>
             </Chapter_1>
         </sections>
     </MyBook>

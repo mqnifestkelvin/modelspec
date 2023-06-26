@@ -1,37 +1,17 @@
 <?xml version="1.0" ?>
 <modelspec>
-    <netid>
+    <netid stable="False" ee0="str" ee2="1" ee3="1.1" ee4="True">
         <cells>
-            <cellid1>
-                <neuroml2_source_file>nnn</neuroml2_source_file>
-            </cellid1>
-            <cellid2>
-                <neuroml2_source_file>nnn2</neuroml2_source_file>
-            </cellid2>
+            <cellid1 neuroml2_source_file="nnn"/>
+            <cellid2 neuroml2_source_file="nnn2"/>
         </cells>
         <synapses>
-            <syn0>
-                <tested>True</tested>
-            </syn0>
-            <syn1>
-                <neuroml2_source_file>xx</neuroml2_source_file>
-            </syn1>
+            <syn0 tested="True"/>
+            <syn1 neuroml2_source_file="xx"/>
         </synapses>
-        <stable>False</stable>
-        <parameters>
-            <size>3</size>
-            <name>None</name>
-        </parameters>
-        <random_connectivity>
-            <probability>0.01</probability>
-        </random_connectivity>
-        <ee0>str</ee0>
-        <ee1>
-            <a>2</a>
-        </ee1>
-        <ee2>1</ee2>
-        <ee3>1.1</ee3>
-        <ee4>True</ee4>
+        <parameters size="3" name="None"/>
+        <random_connectivity probability="0.01"/>
+        <ee1 a="2"/>
         <ee5>1</ee5>
         <ee5>2</ee5>
     </netid>

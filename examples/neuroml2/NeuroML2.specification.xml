@@ -1,54 +1,59 @@
 <?xml version="1.0" ?>
-<root>
-    <NeuroML>
-        <definition>Some description...</definition>
+<modelspec>
+    <NeuroML definition="Some description...">
         <allowed_parameters>
-            <id>
-                <type>str</type>
-                <description>The id of the NeuroML 2 document</description>
-            </id>
-            <version>
-                <type>str</type>
-                <description>NeuroML version used</description>
-            </version>
+            <id type="str" description="The id of the NeuroML 2 document"/>
+            <version type="str" description="NeuroML version used"/>
         </allowed_parameters>
         <allowed_children>
-            <networks>
-                <type>List</type>
-                <description>The networks present</description>
-            </networks>
+            <izhikevich2007Cells type="List" description=""/>
+            <pulseGenerators type="List" description=""/>
+            <networks type="List" description="The networks present"/>
         </allowed_children>
     </NeuroML>
-    <Network>
-        <definition>Some description...</definition>
+    <Izhikevich2007Cell definition="Some description...">
         <allowed_parameters>
-            <id>
-                <type>str</type>
-                <description>The id of the network</description>
-            </id>
+            <id type="str" description="The id of the cell..."/>
+            <C type="str" description=""/>
+            <v0 type="str" description=""/>
+            <k type="str" description=""/>
+            <vr type="str" description=""/>
+            <vt type="str" description=""/>
+            <vpeak type="str" description=""/>
+            <a type="str" description=""/>
+            <b type="str" description=""/>
+            <c type="str" description=""/>
+            <d type="str" description=""/>
+        </allowed_parameters>
+    </Izhikevich2007Cell>
+    <PulseGenerator definition="Some description...">
+        <allowed_parameters>
+            <id type="str" description="The id of the pulseGenerator"/>
+            <delay type="str" description="the delay"/>
+            <duration type="str" description="the duration"/>
+            <amplitude type="str" description="the amplitude"/>
+        </allowed_parameters>
+    </PulseGenerator>
+    <Network definition="Some description...">
+        <allowed_parameters>
+            <id type="str" description="The id of the network"/>
         </allowed_parameters>
         <allowed_children>
-            <populations>
-                <type>List</type>
-                <description>the pops in the net</description>
-            </populations>
+            <populations type="List" description="the pops in the net"/>
+            <explicitInputs type="List" description=""/>
         </allowed_children>
     </Network>
-    <Population>
-        <definition>Some description...</definition>
+    <Population definition="Some description...">
         <allowed_parameters>
-            <id>
-                <type>str</type>
-                <description>The id of the population</description>
-            </id>
-            <component>
-                <type>str</type>
-                <description>the component to use in the population</description>
-            </component>
-            <size>
-                <type>int</type>
-                <description>the size of the population</description>
-            </size>
+            <id type="str" description="The id of the population"/>
+            <component type="str" description="the component to use in the population"/>
+            <size type="int" description="the size of the population"/>
         </allowed_parameters>
     </Population>
-</root>
+    <ExplicitInput definition="Some description...">
+        <allowed_parameters>
+            <target type="str" description="the target of the input"/>
+            <input type="str" description="the input, e.g. pulseGenerator"/>
+        </allowed_parameters>
+    </ExplicitInput>
+</modelspec>

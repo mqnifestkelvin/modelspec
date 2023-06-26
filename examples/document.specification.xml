@@ -1,50 +1,26 @@
 <?xml version="1.0" ?>
-<root>
-    <Document>
-        <definition>A model for documents.</definition>
+<modelspec>
+    <Document definition="A model for documents.">
         <allowed_parameters>
-            <id>
-                <type>str</type>
-                <description>The unique id of the document</description>
-            </id>
-            <title>
-                <type>str</type>
-                <description>The document title</description>
-            </title>
-            <ISBN>
-                <type>int</type>
-                <description>International Standard Book Number</description>
-            </ISBN>
+            <id type="str" description="The unique id of the document"/>
+            <title type="str" description="The document title"/>
+            <ISBN type="int" description="International Standard Book Number"/>
         </allowed_parameters>
         <allowed_children>
-            <sections>
-                <type>List</type>
-                <description>The sections of the document</description>
-            </sections>
+            <sections type="List" description="The sections of the document"/>
         </allowed_children>
     </Document>
-    <Section>
-        <definition>A model of a section of the :class:`Document`. Will contain one :class:`Paragraph` or more, i.e the :class:`Paragraph`(s) in the section, probably related to the :code:`title` of the `Document &lt;#document&gt;`_.</definition>
+    <Section definition="A model of a section of the :class:`Document`. Will contain one :class:`Paragraph` or more, i.e the :class:`Paragraph`(s) in the section, probably related to the :code:`title` of the `Document &lt;#document&gt;`_.">
         <allowed_parameters>
-            <id>
-                <type>str</type>
-                <description>The id of the section</description>
-            </id>
+            <id type="str" description="The id of the section"/>
         </allowed_parameters>
         <allowed_children>
-            <paragraphs>
-                <type>List</type>
-                <description>The paragraphs</description>
-            </paragraphs>
+            <paragraphs type="List" description="The paragraphs"/>
         </allowed_children>
     </Section>
-    <Paragraph>
-        <definition>A model of a paragraph.</definition>
+    <Paragraph definition="A model of a paragraph.">
         <allowed_parameters>
-            <contents>
-                <type>str</type>
-                <description>Paragraph contents, which make up the :class:`Section`s.</description>
-            </contents>
+            <contents type="str" description="Paragraph contents, which make up the :class:`Section`s."/>
         </allowed_parameters>
     </Paragraph>
-</root>
+</modelspec>
