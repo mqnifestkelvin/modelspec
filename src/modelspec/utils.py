@@ -151,9 +151,10 @@ def save_to_xml_file(info_dict, filename, indent=4, root="modelspec"):
         indent (int, optional): The number of spaces used for indentation in the XML file.
                                 Defaults to 4.
     """
+    data = convert_to_xml_attributes(info_dict)
     root = ET.Element(root)
 
-    build_xml_element(root, info_dict)
+    build_xml_element(root, data)
 
     # Create an ElementTree object with the root element
     tree = ET.ElementTree(root)
@@ -170,21 +171,46 @@ def save_to_xml_file(info_dict, filename, indent=4, root="modelspec"):
         file.write(pretty_xml_str)
 
 
-def build_xml_element(parent, data):
-    if isinstance(data, dict):
-        for key, value in data.items():
-            if isinstance(value, dict):
-                element = ET.SubElement(parent, key.replace(" ", "_"))
-                build_xml_element(element, value)
-            elif isinstance(value, list):
-                for item in value:
-                    subelement = ET.SubElement(parent, key.replace(" ", "_"))
-                    build_xml_element(subelement, item)
+def convert_to_xml_attributes(data):
+    attributes = {}
+
+    for key, value in data.items():
+        if isinstance(value, dict):
+            nested_attributes = convert_to_xml_attributes(value)
+            attributes[key] = nested_attributes
+        elif isinstance(value, list):
+            nested_attributes = []
+            for item in value:
+                if isinstance(item, dict):
+                    nested_attributes.append(convert_to_xml_attributes(item))
+                else:
+                    nested_attributes.append(item)
+            attributes[key] = nested_attributes
+        else:
+            attribute_key = '@' + key
+            attributes[attribute_key] = value
+
+    return attributes
+
+
+def build_xml_element(parent_element, data):
+    for key, value in data.items():
+        if isinstance(value, dict):
+            element = ET.SubElement(parent_element, key.replace(" ", "_"))
+            build_xml_element(element, value)
+        elif isinstance(value, list):
+            for item in value:
+                element = ET.SubElement(parent_element, key.replace(" ", "_"))
+                if isinstance(item, dict):
+                    build_xml_element(element, item)
+                else:
+                    element.text = str(item)
+        else:
+            if key.startswith('@'):
+                parent_element.set(key[1:], str(value))
             else:
-                element = ET.SubElement(parent, key.replace(" ", "_"))
+                element = ET.SubElement(parent_element, key.replace(" ", "_"))
                 element.text = str(value)
-    else:
-        parent.text = str(data)
 
 
 def ascii_encode_dict(data):
