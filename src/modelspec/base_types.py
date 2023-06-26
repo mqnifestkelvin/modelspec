@@ -3,7 +3,6 @@ import yaml
 import bson
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
-import xmltodict
 import sys
 
 import numpy as np
@@ -120,13 +119,16 @@ class Base:
         """
         Convert the data dictionary to an XML string representation using the ElementTree library.
         """
-        from modelspec.utils import build_xml_element
+        from modelspec.utils import build_xml_element, convert_to_xml_attributes
 
+        data = convert_to_xml_attributes(self.to_dict())
         root = ET.Element("modelspec")
-        build_xml_element(root, self.to_dict())
+        build_xml_element(root, data)
 
         xml_string = ET.tostring(
-            root, encoding="utf-8", xml_declaration=False, method="xml"
+            root, encoding="utf-8",
+            xml_declaration=False,
+            method="xml"
         ).decode("utf-8")
 
         parsed_xml = xml.dom.minidom.parseString(xml_string)
@@ -268,14 +270,15 @@ class Base:
         include_metadata: bool = True,
         root_name="modelspec",
     ) -> str:
-        from modelspec.utils import build_xml_element
+        from modelspec.utils import build_xml_element, convert_to_xml_attributes
 
         if filename is None:
             filename = f"{self.id}.xml"
 
+        data = convert_to_xml_attributes(self.to_dict())
         root = ET.Element(root_name)
 
-        build_xml_element(root, self.to_dict())
+        build_xml_element(root, data)
 
         # Create an ElementTree object with the root element
         tree = ET.ElementTree(root)
